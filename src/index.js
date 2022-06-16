@@ -1,16 +1,33 @@
 // Create some JavaScript to manage the increment and decrement of the counter
+
+let productQuantity = document.getElementById("quantity");
+let quantity = 0;
+productQuantity.value = quantity;
+
+function calcultatePrice() {
+  let product1Price = 100;
+
+  let price = document.getElementById("product-1-total-price");
+  let totalPrice = product1Price * quantity;
+  price.textContent = `Total price: ${totalPrice}`;
+}
+
 function increase() {
-  let productQuantity = document.getElementById("quantity");
-  let quantity = Number(productQuantity.value);
-  productQuantity.value = quantity + 1;
+  if (quantity <= 9) {
+    quantity++;
+    productQuantity.value = quantity;
+  }
+
+  calcultatePrice();
 }
 
 function decrease() {
-  let productQuantity = document.getElementById("quantity");
+  if (quantity >= 1) {
+    quantity--;
+    productQuantity.value = quantity;
+  }
 
-  let quantity = Number(productQuantity.value);
-
-  productQuantity.value = quantity - 1;
+  calcultatePrice();
 }
 
 let decrement = document.getElementById("decrement");
