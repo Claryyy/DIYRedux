@@ -1,4 +1,12 @@
-// Create some JavaScript to manage the increment and decrement of the counter
+import { store } from "./store";
+
+document.body.addEventListener("click", () => {
+  store.dispatch({ type: "Increment" });
+});
+
+store.subscribe(() => {
+  console.log(store.getState());
+});
 
 let product1Quantity = document.getElementById("quantity-1");
 let product2Quantity = document.getElementById("quantity-2");
@@ -40,5 +48,26 @@ function decrease1() {
   calcultatePrice();
 }
 
+function increase2() {
+  if (quantity2 <= 9) {
+    quantity2++;
+    product2Quantity.value = quantity2;
+  }
+
+  calcultatePrice();
+}
+
+function decrease2() {
+  if (quantity2 >= 1) {
+    quantity2--;
+    product2Quantity.value = quantity2;
+  }
+
+  calcultatePrice();
+}
+
 decrement1.addEventListener("click", decrease1);
 increment1.addEventListener("click", increase1);
+
+decrement2.addEventListener("click", decrease2);
+increment2.addEventListener("click", increase2);

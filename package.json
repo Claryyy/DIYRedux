@@ -6,6 +6,7 @@
   "author": "Mike Chadwick <mikechadwick@ukflooringdirect.co.uk>",
   "license": "MIT",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.2",
     "redux": "^4.2.0"
   },
   "devDependencies": {
