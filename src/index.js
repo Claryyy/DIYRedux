@@ -1,8 +1,10 @@
 import { store } from "./store";
 
 document.body.addEventListener("click", () => {
-  store.dispatch({ type: "Increment" });
+  store.dispatch({ type: "increment" });
 });
+
+//TODO: subscribe to store for state and update DOM with updated values
 
 store.subscribe(() => {
   console.log(store.getState());
@@ -30,44 +32,16 @@ function calcultatePrice() {
   price.textContent = `Total price: ${totalPrice}`;
 }
 
-function increase1() {
-  if (quantity1 <= 9) {
-    quantity1++;
-    product1Quantity.value = quantity1;
-  }
+decrement1.addEventListener("click", () => {
+  store.dispatch({ type: "decrement", payload: "quantity1" });
+});
+increment1.addEventListener("click", () => {
+  store.dispatch({ type: "increment", payload: "quantity1" });
+});
 
-  calcultatePrice();
-}
-
-function decrease1() {
-  if (quantity1 >= 1) {
-    quantity1--;
-    product1Quantity.value = quantity1;
-  }
-
-  calcultatePrice();
-}
-
-function increase2() {
-  if (quantity2 <= 9) {
-    quantity2++;
-    product2Quantity.value = quantity2;
-  }
-
-  calcultatePrice();
-}
-
-function decrease2() {
-  if (quantity2 >= 1) {
-    quantity2--;
-    product2Quantity.value = quantity2;
-  }
-
-  calcultatePrice();
-}
-
-decrement1.addEventListener("click", decrease1);
-increment1.addEventListener("click", increase1);
-
-decrement2.addEventListener("click", decrease2);
-increment2.addEventListener("click", increase2);
+decrement2.addEventListener("click", () => {
+  store.dispatch({ type: "decrement", payload: "quantity2" });
+});
+increment2.addEventListener("click", () => {
+  store.dispatch({ type: "increment", payload: "quantity2" });
+});
