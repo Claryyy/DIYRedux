@@ -10,7 +10,7 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case "increment":
+    case "increment": {
       if (action.payload === "quantity1") {
         const newQuantity = state.quantity1 + 1;
         return Object.assign(state, {
@@ -24,8 +24,9 @@ function reducer(state = initialState, action) {
         quantity2: newQuantity,
         totalPrice: state.price1 * state.quantity1 + state.price2 * newQuantity,
       });
+    }
 
-    case "decrement":
+    case "decrement": {
       if (action.payload === "quantity1") {
         const newQuantity = state.quantity1 - 1;
         return Object.assign(state, {
@@ -39,6 +40,7 @@ function reducer(state = initialState, action) {
         quantity2: newQuantity,
         totalPrice: state.price1 * state.quantity1 + state.price2 * newQuantity,
       });
+    }
     default:
       return state;
   }
