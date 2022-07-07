@@ -25,4 +25,15 @@ describe("DIYRedux tests", () => {
     expect(store).toHaveProperty("dispatch");
     expect(store).toHaveProperty("getState");
   });
+
+  test("that the getState method returns the state", () => {
+    const reducer = () => {};
+    const initialState = "foo";
+
+    const store = redux(reducer, initialState);
+
+    expect(store.getState()).toEqual(initialState);
+  });
+
+  //TODO: test for subscribe amd dispatch
 });
