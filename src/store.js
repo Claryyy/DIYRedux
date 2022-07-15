@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import redux from "./redux";
 
 const initialState = {
   quantity1: 0,
@@ -46,6 +47,8 @@ function reducer(state = initialState, action) {
   }
 }
 
-export const store = configureStore({
-  reducer,
-});
+// export const store = configureStore({
+//   reducer,
+// });
+
+export const store = redux(reducer, initialState);

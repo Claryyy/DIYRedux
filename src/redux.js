@@ -1,9 +1,9 @@
 function redux(reducer, initialState) {
-  if (!reducer || typeof reducer !== "function") {
+  if (typeof reducer === "undefined" || typeof reducer !== "function") {
     throw new Error("redux requires a reducer function");
   }
 
-  if (!initialState) {
+  if (typeof initialState === "undefined") {
     throw new Error("redux requires an initialState");
   }
 
@@ -12,15 +12,16 @@ function redux(reducer, initialState) {
 
   function subscribe(fn) {
     subscribers.push(fn);
-    /**
-     * Accepts a function
-     * Store the functions passed to it in an array
-     *  anytime the state updates fire these functions */
   }
+
   function dispatch(action) {
-    //TODO: next thing to do so we can test the subscibe function too
-    //Make sure subscriber function get called so we are sure the two are connected
-    state = reducer(action);
+    if (!action || typeof action !== "object" || !action.type) {
+      throw new Error("dispatch requires an action type");
+    }
+
+    state = reducer(state, action);
+
+    subscribers.forEach((fn) => fn());
   }
 
   function getState() {

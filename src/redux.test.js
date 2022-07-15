@@ -35,5 +35,53 @@ describe("DIYRedux tests", () => {
     expect(store.getState()).toEqual(initialState);
   });
 
-  //TODO: test for subscribe amd dispatch
+  test("that our subscriber function is called when state is updated", () => {
+    const reducer = () => {};
+    const initialState = "foo";
+
+    const subscriber = jest.fn();
+
+    const store = redux(reducer, initialState);
+
+    store.subscribe(subscriber);
+
+    expect(subscriber).not.toHaveBeenCalled();
+
+    store.dispatch({ type: "bar" });
+
+    expect(subscriber).toHaveBeenCalled();
+  });
+
+  test("that the dispatch function takes in an action type", () => {
+    const reducer = () => {};
+    const initialState = "foo";
+
+    const store = redux(reducer, initialState);
+
+    expect(() => {
+      store.dispatch(true);
+    }).toThrow("dispatch requires an action type");
+  });
+
+  test("that the state updates when an action is dispatched", () => {
+    const initialState = 0;
+
+    const reducer = (state, action) => {
+      switch (action.type) {
+        case "increment": {
+          return state + 1;
+        }
+        default:
+          return state;
+      }
+    };
+
+    const store = redux(reducer, initialState);
+
+    expect(store.getState()).toEqual(0);
+
+    store.dispatch({ type: "increment" });
+
+    expect(store.getState()).toEqual(1);
+  });
 });
